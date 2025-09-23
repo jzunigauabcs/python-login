@@ -1,5 +1,7 @@
-from views.login_view import LoginView
+from contollers.user_controller import UserController
+from models.user_model import UserModel
 
 if __name__ == "__main__":
-    login_view = LoginView()
-    login_view.mainloop()
+    user_model = UserModel()
+    user_controller = UserController(user_model)
+    user_controller.run()
