@@ -1,4 +1,4 @@
-from controllers.models.user_model import UserModel
+from models.user_model import UserModel
 from controllers.user_controller import UserController
 
 if __name__ == "__main__":
