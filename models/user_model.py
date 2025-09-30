@@ -13,8 +13,10 @@ class UserModel:
             return False
         try:
             cursor = conn.cursor()
-            query = "INSERT INTO users (username, password, firstname, lastname) VALUES (%s, %s, %s, %s)"
-            cursor.execute(query, (username, password, firstname, lastname))
+            #query = "INSERT INTO users (username, password, firstname, lastname) VALUES (%s, %s, %s, %s)"
+            #cursor.execute(query, (username, password, firstname, lastname))
+            args = (username, password, firstname, lastname);
+            cursor.callproc("SP_STORE_USER", args)
             conn.commit()
             return True
         except IntegrityError as e:
