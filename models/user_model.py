@@ -1,3 +1,7 @@
+from mysql.connector import IntegrityError, Error
+from db.db_connector import DBConnector
+from tkinter import messagebox
+
 class UserModel:
     def __init__(self):
         pass
@@ -8,8 +12,10 @@ class UserModel:
 
         try:
             cursor = conn.cursor()
-            query = "INSERT INTO users (username, password, firstname, lastname) VALUES (%s, %s, %s, %s)"
-            cursor.execute(query, (username, password, firstname, lastname))
+            #query = "INSERT INTO users (username, password, firstname, lastname) VALUES (%s, %s, %s, %s)"
+            #cursor.execute(query, (username, password, firstname, lastname))
+            args = (username, password, firstname, lastname)
+            cursor.callproc('SP_STORE_USER', args)
             conn.commit()
             return True
         except IntegrityError:  # Se produce cuando el 'username' ya existe (UNIQUE constraint)
